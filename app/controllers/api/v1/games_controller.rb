@@ -4,7 +4,7 @@ module Api
 
       def create 
         @user_1 = User.find_by_api_key(response.request.env["HTTP_X_API_KEY"]) #sophie
-        @user_2 = User.find(params[:opponent_email])
+        @user_2 = User.find_by_email(params[:opponent_email]) #michelle
         binding.pry
 
       end
