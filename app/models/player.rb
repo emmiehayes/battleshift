@@ -1,10 +1,8 @@
 class Player
   attr_reader :board
 
-  def initialize(user)
-    @email = user.email 
-    @board = Board.new()
-    binding.pry
-    # @board = board
+  def initialize(user = nil, board)
+    @username = user.name if user
+    @board = board
   end
 end
