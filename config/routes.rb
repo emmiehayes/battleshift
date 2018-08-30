@@ -13,18 +13,22 @@ Rails.application.routes.draw do
   post '/register', to: 'users#create'
   get '/dashboard', to: 'dashboard#show'
 
+  
   namespace :api do
     namespace :v1 do
-      post "/games", to: "games#show"
-    end 
-  end
-
-  namespace :api do
-    namespace :v1 do
-      resources :games, only: [:show] do
-        post "/shots", to: "games/shots#create"
+      resources :games do 
         post "/ships", to: "games/ships#create"
-      end
+        post "/shots", to: "games/shots#create"
+        end
+      end 
+    end
+  
+  namespace :api do
+    namespace :v1 do
+      get "/games", to: "games#index"
+      post "/games", to: "games#show"
     end
   end
 end
+
+
