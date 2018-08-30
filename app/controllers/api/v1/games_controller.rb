@@ -4,9 +4,7 @@ module Api
       def show
         game = Game.find_by(id: params[:id])
         if game.nil?
-           render status: 400, json: {
-                                      message: "Bad Request."
-                                    }.to_json
+           render status: 400, json: {message: "Bad Request."}.to_json
         else
           render json: game
         end
