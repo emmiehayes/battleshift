@@ -3,17 +3,11 @@ module Api
     module Games
       class ShipsController < ApiController
         def create 
-=begin
-          define the board 
-          :Parameters {"ship_size"=>3, 
-                        "start_space"=>"A1", 
-                        "end_space"=>"A3", 
-                        "controller"=>"api/v1/games/ships", 
-                        "action"=>"create", "game_id"=>"32", 
-                        "ship"=>{"ship_size"=>3, "start_space"=>"A1", "end_space"=>"A3"}} permitted: false>
-=end
+          game = Game.find(params[:game_id].to_i)
+          game.set_starter
+          render json: game
         end
       end 
-    end 
+    end
   end
 end

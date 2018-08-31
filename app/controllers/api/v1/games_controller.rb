@@ -16,7 +16,7 @@ module Api
         game.player_1_board = player_1.board 
         game.player_2_board = player_2.board
         game.save
-        
+       
         render json: game
       end
 
