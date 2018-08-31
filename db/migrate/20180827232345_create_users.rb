@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string  :password_digest
       t.boolean :email_confirmed, :default => false
       t.string  :email_token
+      t.string  :api_key
 
       t.timestamps
     end

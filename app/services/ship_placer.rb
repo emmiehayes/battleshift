@@ -50,6 +50,7 @@ class ShipPlacer
       raise InvalidShipPlacement.new("Attempting to place ship in a space that is already occupied.")
     else
       space.occupy!(ship)
+      msg = "Successfully placed ship with a size of #{ship.length}. You have 1 ship(s) to place with a size of 2."
     end
   end
 end

@@ -8,11 +8,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       UserConfirmationMailer.confirmation(@user).deliver_now
-      flash[:success] = "Please confirm your email address"
       session[:user_id] = @user.id
       redirect_to dashboard_path
     else
-      flash[:error] = "Something went wrong"
       render :new
     end
   end
