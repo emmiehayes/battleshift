@@ -15,6 +15,7 @@ module Api
         game = Game.new
         game.player_1_board = player_1.board
         game.player_2_board = player_2.board
+        game.current_turn = 'challenger'
         game.save
         render json: game
       end

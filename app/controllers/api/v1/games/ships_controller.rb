@@ -4,11 +4,9 @@ class Api::V1::Games::ShipsController < ApiController
     game = Game.find(params[:game_id].to_i)
     # refactor private method game_id to_i
 
-    game.set_starter
-
     placed_ship = ShipPlacer.new(params, game.player_1_board)
     placed_ship.run
     render json: game, message: placed_ship.message
   end
-
+  
 end
