@@ -7,16 +7,17 @@ module Api
         user_2 = User.find_by_email(params[:opponent_email]) #michelle
 
         board_1 = Board.new
-        player_1 = Player.new(user_1, board_1)
+        @player_1 = Player.new(user_1, board_1)
 
         board_2 = Board.new
-        player_2 = Player.new(user_2, board_2)
+        @player_2 = Player.new(user_2, board_2)
 
         game = Game.new
-        game.player_1_board = player_1.board
-        game.player_2_board = player_2.board
-        game.current_turn = 'challenger'
+        game.player_1_board = @player_1.board
+        game.player_2_board = @player_2.board
+        game.current_turn = "challenger"
         game.save
+
         render json: game
       end
 
@@ -30,6 +31,12 @@ module Api
         else
           render json: game
         end
+      end
+      private
+
+      def player_turn
+
+
       end
     end
   end

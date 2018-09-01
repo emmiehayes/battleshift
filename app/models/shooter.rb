@@ -6,6 +6,7 @@ class Shooter
   end
 
   def fire!
+    require "pry"; binding.pry
     if valid_shot?
       space.attack!
     else
@@ -21,7 +22,7 @@ class Shooter
     attr_reader :board, :target
 
     def space
-      @space ||= board.locate_space(target)
+      space ||= board.locate_space(target)
     end
 
     def valid_shot?

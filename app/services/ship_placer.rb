@@ -1,4 +1,5 @@
 class ShipPlacer
+  attr_reader :placed
 
   def initialize(params, board)
     @board       = board
