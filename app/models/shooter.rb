@@ -6,8 +6,8 @@ class Shooter
   end
 
   def fire!
-    require "pry"; binding.pry
     if valid_shot?
+      # require "pry"; binding.pry
       space.attack!
     else
       raise InvalidAttack.new("Invalid coordinates.")
