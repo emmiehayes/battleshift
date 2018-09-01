@@ -8,8 +8,7 @@ class Space
   end
 
   def attack!
-    @status = if contents && not_attacked?
-                contents.attack!
+  @status =   if contents && not_attacked?
                 "Hit"
               else
                 "Miss"
@@ -28,4 +27,3 @@ class Space
     status == "Not Attacked"
   end
 end
-

@@ -21,7 +21,7 @@ class Shooter
     attr_reader :board, :target
 
     def space
-      @space ||= board.locate_space(target)
+      space ||= board.locate_space(target)
     end
 
     def valid_shot?
