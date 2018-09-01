@@ -7,7 +7,6 @@ class Api::V1::Games::ShipsController < ApiController
     placed_ship.run
     x = ShipPlacer.new(params, game.player_2_board)
     x.run
-    # game.current_turn = "computer"
     game.save
 
     render json: game, message: placed_ship.message
