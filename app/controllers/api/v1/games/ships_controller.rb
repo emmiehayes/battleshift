@@ -6,10 +6,9 @@ class Api::V1::Games::ShipsController < ApiController
 
     game.set_starter
 
-    place_ship = ShipPlacer.new(params, game.player_1_board)
-    place_ship.run
-    # require "pry"; binding.pry
-    render json: game, message: place_ship.message
+    placed_ship = ShipPlacer.new(params, game.player_1_board)
+    placed_ship.run
+    render json: game, message: placed_ship.message
   end
 
 end

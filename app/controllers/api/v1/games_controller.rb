@@ -17,7 +17,6 @@ module Api
         game.player_2_board = player_2.board
         game.save
         render json: game
-        # require "pry"; binding.pry
       end
 
       def index
