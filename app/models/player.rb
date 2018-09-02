@@ -1,5 +1,5 @@
 class Player
-  attr_reader :board, :username
+  attr_reader :board, :username, :api_key
 
   def initialize(user = nil, board)
     @id = user.id 

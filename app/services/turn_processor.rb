@@ -1,4 +1,5 @@
 class TurnProcessor
+  attr_reader :previous_turn
   def initialize(game, target)
     @game   = game
     @target = target
@@ -7,12 +8,10 @@ class TurnProcessor
 
   def run!
     begin
-      attack_player_2
-      attack_player_1
-      # ai_attack_back
+      attack
       game.save!
-    rescue InvalidAttack => e
-      @messages << e.message
+    # rescue InvalidAttack => e
+    #   @messages << e.message
     end
   end
 
@@ -20,33 +19,26 @@ class TurnProcessor
     @messages.join(" ")
   end
 
+  def switch_turn 
+    if game.current_turn == 'player_1'
+      game.current_turn = 'player_2'
+    else 
+      game.current_turn = 'player_1'
+    end
+  end
+  
   private
-
   attr_reader :game, :target
   
-  def attack_player_2
-    result = Shooter.fire!(board: game.player_2_board, target: target)
-    @messages << "Your shot resulted in a #{result}."
-    game.player_1_turns += 1
-  end
-
-  def attack_player_1
-    result = Shooter.fire!(board: game.player_1_board, target: target)
-    @messages << "Your shot resulted in a #{result}."
-    game.player_2_turns += 1
+  def attack
+    if game.current_turn == 'player_1'
+      result = Shooter.fire!(board: game.player_2_board, target: target)
+      @messages << "Your shot resulted in a #{result}."
+      game.player_1_turns += 1
+    elsif game.current_turn == 'player_2'
+      result = Shooter.fire!(board: game.player_1_board, target: target)
+      @messages << "Your shot resulted in a #{result}."
+      game.player_2_turns += 1 
+    end
   end
 end
-
-# def ai_attack_back
-#   result = AiSpaceSelector.new(player.board).fire!
-#   @messages << "The computer's shot resulted in a #{result}."
-#   game.player_2_turns += 1
-# end
-
-# def player_1
-#   Player.new(game.player_1_board)
-# end
-
-# def player_2
-#   Player.new(game.player_2_board)
-# end
