@@ -1,8 +1,11 @@
 class Player
-  attr_reader :board
+  attr_reader :board, :username
 
   def initialize(user = nil, board)
-    @username = user.name if user
+    @id = user.id 
+    @username = user.name
+    @email = user.email
+    @api_key = user.api_key
     @board = board
   end
 end
