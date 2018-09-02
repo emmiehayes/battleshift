@@ -20,7 +20,6 @@ class TurnProcessor
   end
 
   def switch_turn
-    # require "pry"; binding.pry
     if invalid_coordinates?
       game.current_turn = game.current_turn
     elsif game.current_turn == 'player_1'
@@ -42,11 +41,16 @@ class TurnProcessor
     if game.current_turn == 'player_1'
       result = Shooter.fire!(board: game.player_2_board, target: target)
       @messages << "Your shot resulted in a #{result}."
-      game.player_1_turns += 1
+      game.player_2_ships_down += 1 if result.include?('sunk')
     elsif game.current_turn == 'player_2'
       result = Shooter.fire!(board: game.player_1_board, target: target)
       @messages << "Your shot resulted in a #{result}."
-      game.player_2_turns += 1
+      game.player_1_ships_down += 1 if result.include?('sunk')
     end
+    @messages << "Game over." if game_over?
+  end
+
+  def game_over?
+    game.player_1_ships_down == 2 || game.player_2_ships_down == 2
   end
 end

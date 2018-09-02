@@ -1,10 +1,8 @@
 class Api::V1::GamesController < ActionController::API
 
   def create
-
     user_1 = User.find_by_api_key(request.env["HTTP_X_API_KEY"]) #sophie
     user_2 = User.find_by_email(params[:opponent_email]) #michelle
-
     board = Board.new
 
     player_1 = Player.new(user_1, board)
