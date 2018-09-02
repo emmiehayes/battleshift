@@ -29,6 +29,13 @@ class TurnProcessor
     end
   end
 
+  def announce_winner
+    if game.player_1_ships_down == 2
+      game.winner = User.find_by_api_key(game.player_2).email
+    elsif game.player_2_ships_down
+      game.winner = User.find_by_api_key(game.player_1).email
+    end
+  end
 
   private
   attr_reader :game, :target
@@ -47,10 +54,14 @@ class TurnProcessor
       @messages << "Your shot resulted in a #{result}."
       game.player_1_ships_down += 1 if result.include?('sunk')
     end
-    @messages << "Game over." if game_over?
+    if game_over?
+      @messages << "Game over."
+      announce_winner
+    end
   end
 
   def game_over?
     game.player_1_ships_down == 2 || game.player_2_ships_down == 2
   end
+
 end

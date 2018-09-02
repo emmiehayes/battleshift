@@ -27,7 +27,8 @@ class Api::V1::Games::ShotsController < ApiController
     @game.save
     if invalid_coordinates?
       render status: 400, json: @game, message: "Invalid coordinates."
-    elsif  game_over?
+    elsif game_over?
+      @turn_processor.announce_winner
       render status: 400, json: @game, message: "Your shot resulted in a Hit. Battleship sunk. Game over."
     else
       render json: @game, message: @turn_processor.message
