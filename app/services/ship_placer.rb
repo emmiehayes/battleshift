@@ -3,7 +3,7 @@ class ShipPlacer
 
   def initialize(params, board)
     @board       = board
-    @ship        = params[:ship]
+    @ship        = Ship.new(params[:ship_size])
     @start_space = params[:start_space]
     @end_space   = params[:end_space]
     @placed = []
@@ -39,14 +39,14 @@ class ShipPlacer
     row = start_space[0]
     range = start_space[1]..end_space[1]
     @msg = "Ship size must be equal to the number of spaces you are trying to fill."
-    raise InvalidShipPlacement unless range.count == ship[:ship_size]
+    raise InvalidShipPlacement unless range.count == ship.length
     range.each { |column| place_ship(row, column) }
   end
 
   def place_in_column
     column = start_space[1]
     range   = start_space[0]..end_space[0]
-    raise InvalidShipPlacement unless range.count == ship[:ship_size]
+    raise InvalidShipPlacement unless range.count == ship.length
     range.each { |row| place_ship(row, column) }
   end
 
@@ -58,7 +58,7 @@ class ShipPlacer
     else
       space.occupy!(ship)
       @placed << ship
-      @msg = "Successfully placed ship with a size of #{ship[:ship_size]}. You have 1 ship(s) to place with a size of 2."
+      @msg = "Successfully placed ship with a size of #{ship.length}. You have 1 ship(s) to place with a size of 2."
     end
     @msg = "Successfully placed ship with a size of 2. You have 0 ship(s) to place." if @placed.count == 2
   end
