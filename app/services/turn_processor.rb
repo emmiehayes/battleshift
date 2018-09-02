@@ -1,5 +1,5 @@
 class TurnProcessor
-  attr_reader :previous_turn
+  
   def initialize(game, target)
     @game   = game
     @target = target
@@ -10,8 +10,8 @@ class TurnProcessor
     begin
       attack
       game.save!
-    # rescue InvalidAttack => e
-    #   @messages << e.message
+    rescue InvalidAttack => e
+      @messages << e.message
     end
   end
 
@@ -26,7 +26,7 @@ class TurnProcessor
       game.current_turn = 'player_1'
     end
   end
-  
+
   private
   attr_reader :game, :target
   
