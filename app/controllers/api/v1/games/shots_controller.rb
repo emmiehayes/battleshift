@@ -3,6 +3,7 @@ class Api::V1::Games::ShotsController < ApiController
   def create
     @game = Game.find(params[:game_id].to_i)
     return render status: 400, json: @game, message: "Invalid move. Game over." if @game.winner
+    return render status: 401, json: @game, message: "Unauthorized" unless actual_player?
     if correct_player?
       player_take_your_shot
     elsif incorrect_player?
@@ -11,6 +12,10 @@ class Api::V1::Games::ShotsController < ApiController
   end
 
   private
+
+  def actual_player?
+    request.env["HTTP_X_API_KEY"] == @game.player_1 || request.env["HTTP_X_API_KEY"] == @game.player_2
+  end
 
   def correct_player?
     (@game.current_turn == "player_1" && request.env["HTTP_X_API_KEY"] == @game.player_1) || (@game.current_turn == "player_2" && request.env["HTTP_X_API_KEY"] == @game.player_2)
