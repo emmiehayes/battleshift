@@ -23,7 +23,9 @@ module BattleshipWeb
     config.before_initialize do |app|
       app.config.paths.add 'app/services/values', :eager_load => true
     end
-
+    
+    config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
+    
     config.action_mailer.delivery_method = :smtp
 
     config.action_mailer.smtp_settings = {
@@ -47,5 +49,7 @@ module BattleshipWeb
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+
   end
 end

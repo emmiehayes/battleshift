@@ -1,8 +1,8 @@
 class TurnProcessor
 
   def initialize(game, target)
-    @game   = game
-    @target = target
+    @game     = game
+    @target   = target
     @messages = []
   end
 
@@ -63,5 +63,4 @@ class TurnProcessor
   def game_over?
     game.player_1_ships_down == 2 || game.player_2_ships_down == 2
   end
-
 end

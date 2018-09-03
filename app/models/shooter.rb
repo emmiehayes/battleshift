@@ -1,4 +1,5 @@
 class Shooter
+  
   def initialize(board:, target:)
     @board     = board
     @target    = target

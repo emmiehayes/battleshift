@@ -8,6 +8,7 @@ class Space
   end
 
   def attack!
+    # developer empathy
     @status = if contents && not_attacked?
                 contents.attack!
                 if contents.is_sunk?

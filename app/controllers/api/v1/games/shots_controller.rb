@@ -2,8 +2,8 @@ class Api::V1::Games::ShotsController < ApiController
 
   def create
     @game = Game.find(params[:game_id].to_i)
-    return render status: 400, json: @game, message: "Invalid move. Game over." if @game.winner
     return render status: 401, json: @game, message: "Unauthorized" unless actual_player?
+    return render status: 400, json: @game, message: "Invalid move. Game over." if @game.winner
     if correct_player?
       player_take_your_shot
     elsif incorrect_player?
